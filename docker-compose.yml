@@ -1,0 +1,23 @@
+version: '3'
+services:
+  web:
+    volumes:
+      - C:/Users/GICM/hello-docker/hellodocker:/app
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: root
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: hellodocker_development
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      socket: /run/mysqld/mysqld.sock
+    ports:
+      - "3307:3306"
